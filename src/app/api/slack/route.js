@@ -6,10 +6,10 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
-let CHECK_URL = process.env.SITEMAP_URL || 'https://www.opencrawler.in/api/rhc?url=https://www.opencrawler.in/sitemap.xml';
+let CHECK_URL = `https://www.opencrawler.in/api/rhc?url=${url}`;
 let CHANNEL_ID = process.env.CHANNEL_ID;
 
-async function checkUrlStatus() {
+async function checkUrlStatus(url) {
   try {
     const response = await axios.get(CHECK_URL);
     console.log(response, "Response");
@@ -34,9 +34,11 @@ async function sendSlackMessage(message) {
   }
 }
 
-export async function GET() {
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const url = searchParams.get('url');
   try {
-    await checkUrlStatus();
+    await checkUrlStatus(url);
     return new Response('URL status check completed', { status: 200 });
   } catch (error) {
     console.error('Error during URL status check:', error);
