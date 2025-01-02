@@ -6,10 +6,11 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
-let CHECK_URL = `https://www.opencrawler.in/api/rhc?url=${url}`;
+
 let CHANNEL_ID = process.env.CHANNEL_ID;
 
 async function checkUrlStatus(url) {
+  let CHECK_URL = `https://www.opencrawler.in/api/rhc?url=${url}`;
   try {
     const response = await axios.get(CHECK_URL);
     console.log(response, "Response");
