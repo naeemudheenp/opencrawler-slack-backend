@@ -16,7 +16,9 @@ async function checkUrlStatus(url) {
     console.log(response, "Response");
 
     if (response.data.status !== 200) {
-      await sendSlackMessage(`:warning: Few urls are invalid: ${response.data.brokenLinks}`);
+      await sendSlackMessage(
+        `:warning: <!channel> Few URLs are invalid:\n${response.data.brokenLinks.join('\n')}\n`
+      );
     }
   } catch (error) {
     console.error('Error checking URL:', error);
