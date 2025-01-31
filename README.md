@@ -42,5 +42,7 @@ This repository provides a  application to notify broken links in a website to a
 ```
 Also make sure that you save SLACK_BOT_TOKEN and SLACK_SIGNING_SECRET. 
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnaeemudheenp%2Fopencrawler-slack-backend&env=SLACK_BOT_TOKEN,SLACK_SIGNING_SECRET,CHANNEL_ID&envDescription=Make%20sure%20you%20add%20slack%20app%20token%20%2C%20signing%20secret%20%20and%20channel%20id%20where%20you%20want%20to%20sent%20message%2C)
+
 
 
