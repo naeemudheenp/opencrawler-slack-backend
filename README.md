@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Slack Broken Links Notifier
 
-## Getting Started
+This repository provides a  application to notify broken links in a website to a Slack channel. The app uses the [Slack Bolt Framework](https://slack.dev/bolt-js/tutorial/getting-started) and can be integrated with [OpenCrawler](https://opencrawler.in/) to automate broken link reporting.
 
-First, run the development server:
+## Features
+- Sends a daily report of broken links detected on your website to a Slack channel.
+- Provides a detailed summary, including the total pages scanned and the broken links.
+- Can be deployed on platforms like [Vercel](https://vercel.com/).
+- Supports scheduled API calls using services like [cron-job.org](https://cron-job.org/en/).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## How to setup
+
+### Goto slack and create a app using below manifest.
+
+```json
+{
+    "display_information": {
+        "name": "opencrawler"
+    },
+    "features": {
+        "bot_user": {
+            "display_name": "opencrawler",
+            "always_online": false
+        }
+    },
+    "oauth_config": {
+        "redirect_urls": [
+            "<hosteddomain>/slack/events"
+        ],
+        "scopes": {
+            "bot": [
+                "chat:write"
+            ]
+        }
+    },
+    "settings": {
+        "org_deploy_enabled": false,
+        "socket_mode_enabled": false,
+        "token_rotation_enabled": false
+    }
+}
 ```
+Also make sure that you save SLACK_BOT_TOKEN and SLACK_SIGNING_SECRET. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
