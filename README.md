@@ -43,14 +43,33 @@ This repository provides a  application to notify broken links in a website to a
 Also make sure that you save SLACK_BOT_TOKEN and SLACK_SIGNING_SECRET. 
 
 ### Deploy the app in vercel by click below button and also add  following env
-SLACK_BOT_TOKEN
-SLACK_SIGNING_SECRET
-CHANNEL_ID
+- ```SLACK_BOT_TOKEN```
+- ```SLACK_SIGNING_SECRET```
+- ```CHANNEL_ID   //This should be the id of channel  where you want to receave the message ```
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnaeemudheenp%2Fopencrawler-slack-backend&env=SLACK_BOT_TOKEN,SLACK_SIGNING_SECRET,CHANNEL_ID&envDescription=Make%20sure%20you%20add%20slack%20app%20token%20%2C%20signing%20secret%20%20and%20channel%20id%20where%20you%20want%20to%20sent%20message%2C)
 
 ### Setup schedule 
-Goto cron-job.org
+- Goto cron-job.org
+- Create a cron-job
+- Add following url in api
+```
+https://opencrawler-backend.onrender.com/add-job
+```
+- Click on advanced setting
+- In advanced section chnage GET METHOD TO POST and add below in Request body section
+```
+{
+    
+    "email":"{test@test.com}",
+    "url":"https://test.com/",
+    "mode":"deepscan",
+    "postActionApi":"http://<replace with the url you got from vercel after deploying>/api/slack"
+
+}        
+```
+# Done thats it :) Now the app will check your website based on schedule you have set and will report slack channel if any broken links is found.
+# Contributions are welcome
 
 
 
